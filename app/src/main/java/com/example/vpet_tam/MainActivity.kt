@@ -1,7 +1,11 @@
 package com.example.vpet_tam
 
 import android.os.Bundle
+import android.view.View
 import android.view.Window
+import android.widget.Button
+import android.widget.PopupMenu
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
@@ -32,5 +36,21 @@ class MainActivity : AppCompatActivity() {
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
+       // navController.navigate(R.id.navigation_notifications)
+
+        binding.btn.setOnClickListener {
+            showPopupMenu(binding.btn)
+        }
+
+
+    }
+
+    fun showPopupMenu(view: View) = PopupMenu(view.context, view).run {
+        menuInflater.inflate(R.menu.popup_menu, menu)
+        setOnMenuItemClickListener { item ->
+            Toast.makeText(view.context, "You Clicked : ${item.title}", Toast.LENGTH_SHORT).show()
+            true
+        }
+        show()
     }
 }
