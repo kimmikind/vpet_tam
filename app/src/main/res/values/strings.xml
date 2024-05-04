@@ -7,4 +7,15 @@
     <string name="heart">heart</string>
     <string name="play">play button</string>
     <string name="select_pet">Select pet</string>
+    <string name="title_choose">Choose pet</string>
+    <string name="title_start">Start a game</string>
+    <string name="p_name">NAME</string>
+    <string name="p_age">DAY</string>
+    <string name="sp_food">FEED</string>
+    <string name="food_desc">food</string>
+    <string name="feed_btn">FEED</string>
+    <string name="cure_desc">cure</string>
+    <string name="cure_btn">CURE</string>
+    <string name="sleep_desc">sleep</string>
+    <string name="sleep_btn">SLEEP</string>
 </resources>

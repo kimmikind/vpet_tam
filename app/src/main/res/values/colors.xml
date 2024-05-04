@@ -8,5 +8,8 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="main">#FFD4E1</color>
-    <color name="text_shadow">#FF89AC</color>
+    <color name="text_shadow_m">#FF89AC</color>
+    <color name="text_shadow_s">#1E1E1E</color>
+    <color name="bar_main">#70000000</color>
+    <color name="btn_home">#FEFEFE</color>
 </resources>

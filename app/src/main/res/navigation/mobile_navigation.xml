@@ -3,23 +3,43 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/navigation_home">
+    app:startDestination="@id/navigation_start">
+
+    <fragment
+        android:id="@+id/navigation_start"
+        android:name="com.example.vpet_tam.ui.startwindow.StartFragment"
+        android:label="@string/title_start"
+        tools:layout="@layout/fragment_start" >
+        <action
+            android:id="@+id/action_navigation_start_to_navigation_choose"
+            app:destination="@id/navigation_choose" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_choose"
+        android:name="com.example.vpet_tam.ui.choosenewpet.ChooseFragment"
+        android:label="@string/title_choose"
+        tools:layout="@layout/fragment_choose" >
+        <action
+            android:id="@+id/action_navigation_choose_to_navigation_home"
+            app:destination="@id/navigation_home" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_home"
         android:name="com.example.vpet_tam.ui.home.HomeFragment"
         android:label="@string/title_home"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_navigation_home_to_navigation_settings"
+            app:destination="@id/navigation_settings" />
+    </fragment>
 
     <fragment
-        android:id="@+id/navigation_dashboard"
-        android:name="com.example.vpet_tam.ui.dashboard.DashboardFragment"
-        android:label="@string/title_dashboard"
-        tools:layout="@layout/fragment_dashboard" />
-
-    <fragment
-        android:id="@+id/navigation_notifications"
-        android:name="com.example.vpet_tam.ui.notifications.NotificationsFragment"
+        android:id="@+id/navigation_settings"
+        android:name="com.example.vpet_tam.ui.settings.SettingsFragment"
         android:label="@string/title_notifications"
-        tools:layout="@layout/fragment_notifications" />
+        tools:layout="@layout/fragment_settings" />
+
+
 </navigation>

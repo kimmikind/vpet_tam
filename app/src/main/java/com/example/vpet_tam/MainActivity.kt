@@ -25,6 +25,8 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+
+        /*
         val navView: BottomNavigationView = binding.navView
         val navController = findNavController(R.id.nav_host_fragment_activity_main)
         // Passing each menu ID as a set of Ids because each
@@ -41,16 +43,16 @@ class MainActivity : AppCompatActivity() {
         binding.btn.setOnClickListener {
             showPopupMenu(binding.btn)
         }
-
+        */
 
     }
 
-    fun showPopupMenu(view: View) = PopupMenu(view.context, view).run {
+    /*fun showPopupMenu(view: View) = PopupMenu(view.context, view).run {
         menuInflater.inflate(R.menu.popup_menu, menu)
         setOnMenuItemClickListener { item ->
             Toast.makeText(view.context, "You Clicked : ${item.title}", Toast.LENGTH_SHORT).show()
             true
         }
         show()
-    }
+    }*/
 }

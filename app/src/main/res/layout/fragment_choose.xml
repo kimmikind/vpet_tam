@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <!--<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/frameLayout"
@@ -7,6 +8,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/__png_kittl"
     tools:context=".ui.choosenewpet.ChooseFragment">
+
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/SelectLayout"
@@ -22,13 +24,9 @@
             android:layout_marginStart="50dp"
             android:layout_marginTop="70dp"
             android:fontFamily="@font/press_start_2p"
-            android:shadowColor="@color/text_shadow"
-            android:shadowDx="5"
-            android:shadowDy="5"
-            android:shadowRadius="10"
             android:text="@string/select_pet"
             android:textAppearance="@style/main_sent"
-            android:textSize="30sp"
+
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
@@ -121,21 +119,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:id="@+id/type_name_txt"
-            android:layout_width="240dp"
-            android:layout_height="25dp"
-            android:layout_marginStart="60dp"
-            android:layout_marginTop="20dp"
-            android:fontFamily="@font/press_start_2p"
-            android:hint="input pet's name"
-            android:textAlignment="center"
-            android:textAllCaps="false"
-            android:textColor="@color/black"
-            android:textSize="15sp"
-            app:layout_constraintStart_toStartOf="@+id/type_name_ic"
-            app:layout_constraintTop_toTopOf="@+id/type_name_ic" />
-
         <ImageButton
             android:id="@+id/btn_start"
             android:layout_width="300dp"
@@ -147,7 +130,20 @@
             android:src="@drawable/img_start"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <EditText
+            android:id="@+id/type_name_txt"
+            android:layout_width="279dp"
+            android:layout_height="47dp"
+            android:layout_marginStart="40dp"
+            android:layout_marginTop="12dp"
+            android:ems="10"
+            android:fontFamily="@font/press_start_2p"
+            android:hint="type pet's name"
+            android:inputType="text"
+            app:layout_constraintStart_toStartOf="@+id/type_name_ic"
+            app:layout_constraintTop_toTopOf="@+id/type_name_ic" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+</FrameLayout>
+<!--</androidx.constraintlayout.widget.ConstraintLayout>-->
