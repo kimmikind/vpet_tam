@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="horizontal">
+
+    <Button
+        app:contentInsetEnd="0dp"
+        app:contentInsetStart="0dp"
+        android:id="@+id/button1"
+        android:layout_width="100dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="8dp"
+        android:background="?android:attr/selectableItemBackground"
+        android:layout_marginStart="0dp"
+        android:fontFamily="@font/press_start_2p"
+        android:onClick="verticalDropDownIconMenu"
+        android:padding="16dp"
+        android:text="@string/feed_btn"
+        android:textSize="15sp"
+        android:textColor="#DADCE0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="100dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="100dp"
+        android:layout_marginTop="8dp"
+        android:background="?android:attr/selectableItemBackground"
+        android:fontFamily="@font/press_start_2p"
+        android:onClick="verticalDropDownIconMenu"
+        android:padding="16dp"
+        android:text="@string/cure_btn"
+        android:textColor="#DADCE0"
+        android:textSize="15sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <Button
+        android:id="@+id/button3"
+        android:layout_width="100dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="200dp"
+        android:layout_marginTop="8dp"
+        android:background="?android:attr/selectableItemBackground"
+        android:fontFamily="@font/press_start_2p"
+        android:onClick="verticalDropDownIconMenu"
+        android:padding="9dp"
+        android:text="@string/sleep_btn"
+        android:textColor="#DADCE0"
+        android:textSize="15sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+</RelativeLayout>

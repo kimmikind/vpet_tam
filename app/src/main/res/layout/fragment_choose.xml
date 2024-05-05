@@ -40,62 +40,74 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <ImageView
+        <ImageButton
             android:id="@+id/icon_bear"
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:layout_marginStart="40dp"
             android:layout_marginTop="16dp"
+            android:scaleType="centerInside"
+            android:background="?android:attr/selectableItemBackground"
             android:src="@drawable/pet_animals_bear"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <ImageView
+        <ImageButton
             android:id="@+id/icon_cat"
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:layout_marginStart="150dp"
+            android:scaleType="centerInside"
+            android:background="?android:attr/selectableItemBackground"
             android:layout_marginTop="16dp"
             android:src="@drawable/pet_animals_cat"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <ImageView
+        <ImageButton
             android:id="@+id/icon_rabbit"
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:layout_marginStart="260dp"
+            android:scaleType="centerInside"
+            android:background="?android:attr/selectableItemBackground"
             android:layout_marginTop="16dp"
             android:src="@drawable/pet_animals_rabbit_1"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <ImageView
+        <ImageButton
             android:id="@+id/icon_dog"
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:layout_marginStart="40dp"
             android:layout_marginTop="116dp"
+            android:scaleType="centerInside"
+            android:background="?android:attr/selectableItemBackground"
             android:src="@drawable/pet_animals_dog"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <ImageView
-            android:id="@+id/icon_turle"
+        <ImageButton
+            android:id="@+id/icon_turtle"
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:layout_marginStart="150dp"
             android:layout_marginTop="116dp"
+            android:scaleType="centerInside"
+            android:background="?android:attr/selectableItemBackground"
             android:src="@drawable/pet_animals_turtle"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <ImageView
+        <ImageButton
             android:id="@+id/icon_frog"
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:layout_marginStart="260dp"
             android:layout_marginTop="116dp"
+            android:scaleType="centerInside"
+            android:background="?android:attr/selectableItemBackground"
             android:src="@drawable/pet_animals_frog"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -113,7 +125,7 @@
             android:id="@+id/type_name_ic"
             android:layout_width="350dp"
             android:layout_height="70dp"
-            android:layout_marginStart="30dp"
+            android:layout_marginStart="25dp"
             android:layout_marginTop="60dp"
             android:src="@drawable/type_name"
             app:layout_constraintStart_toStartOf="parent"
@@ -143,6 +155,18 @@
             android:inputType="text"
             app:layout_constraintStart_toStartOf="@+id/type_name_ic"
             app:layout_constraintTop_toTopOf="@+id/type_name_ic" />
+
+        <!--<TextView
+            android:id="@+id/choosed"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="152dp"
+            android:layout_marginTop="16dp"
+            android:fontFamily="@font/press_start_2p"
+            android:textAppearance="@style/main_sent"
+            android:text=""
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />-->
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </FrameLayout>

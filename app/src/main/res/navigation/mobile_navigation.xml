@@ -13,6 +13,9 @@
         <action
             android:id="@+id/action_navigation_start_to_navigation_choose"
             app:destination="@id/navigation_choose" />
+        <action
+            android:id="@+id/action_navigation_start_to_navigation_home"
+            app:destination="@id/navigation_home" />
     </fragment>
 
     <fragment
@@ -39,7 +42,11 @@
         android:id="@+id/navigation_settings"
         android:name="com.example.vpet_tam.ui.settings.SettingsFragment"
         android:label="@string/title_notifications"
-        tools:layout="@layout/fragment_settings" />
+        tools:layout="@layout/fragment_settings" >
+        <action
+            android:id="@+id/action_navigation_settings_to_navigation_home"
+            app:destination="@id/navigation_home" />
+    </fragment>
 
 
 </navigation>

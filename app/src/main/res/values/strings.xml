@@ -18,4 +18,9 @@
     <string name="cure_btn">CURE</string>
     <string name="sleep_desc">sleep</string>
     <string name="sleep_btn">SLEEP</string>
+    <string name="menu_text">MENU</string>
+    <string name="menu_change_name">CHANGE NAME</string>
+    <string name="menu_turn_event">ON/OFF\t RANDOM EVENTS</string>
+    <string name="menu_free_pet">FREE YOUR PET</string>
+    <string name="ok_event">OK</string>
 </resources>

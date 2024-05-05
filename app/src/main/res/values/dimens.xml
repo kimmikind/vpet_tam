@@ -8,4 +8,5 @@
     <dimen name="letter_top">10dp</dimen>
     <dimen name="virtual">130dp</dimen>
     <dimen name="btn_home_size">17sp</dimen>
+    <dimen name="btn_ok">10sp</dimen>
 </resources>
