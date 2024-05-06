@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/navigation_start"
-        android:name="com.example.vpet_tam.ui.startwindow.StartFragment"
+        android:name="com.example.vpet_tam.view.StartFragment"
         android:label="@string/title_start"
         tools:layout="@layout/fragment_start" >
         <action
@@ -20,7 +20,7 @@
 
     <fragment
         android:id="@+id/navigation_choose"
-        android:name="com.example.vpet_tam.ui.choosenewpet.ChooseFragment"
+        android:name="com.example.vpet_tam.view.ChooseFragment"
         android:label="@string/title_choose"
         tools:layout="@layout/fragment_choose" >
         <action
@@ -30,7 +30,7 @@
 
     <fragment
         android:id="@+id/navigation_home"
-        android:name="com.example.vpet_tam.ui.home.HomeFragment"
+        android:name="com.example.vpet_tam.view.HomeFragment"
         android:label="@string/title_home"
         tools:layout="@layout/fragment_home" >
         <action
@@ -40,7 +40,7 @@
 
     <fragment
         android:id="@+id/navigation_settings"
-        android:name="com.example.vpet_tam.ui.settings.SettingsFragment"
+        android:name="com.example.vpet_tam.view.SettingsFragment"
         android:label="@string/title_notifications"
         tools:layout="@layout/fragment_settings" >
         <action

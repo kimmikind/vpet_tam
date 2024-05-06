@@ -22,7 +22,8 @@
         android:id="@+id/event_head"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="130dp"
+        android:layout_marginStart="144dp"
+        android:layout_marginTop="16dp"
         android:fontFamily="@font/press_start_2p"
         android:text="EVENT"
         android:textAlignment="center"
@@ -41,6 +42,20 @@
 
         android:text=""
         android:textAlignment="center"
+        android:textAppearance="@style/main_sent"
+        android:textSize="24sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/ok_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="160dp"
+        android:layout_marginTop="144dp"
+        android:background="?android:attr/selectableItemBackground"
+        android:fontFamily="@font/press_start_2p"
+        android:text="@string/ok_btn_txt"
         android:textAppearance="@style/main_sent"
         android:textSize="24sp"
         app:layout_constraintStart_toStartOf="parent"

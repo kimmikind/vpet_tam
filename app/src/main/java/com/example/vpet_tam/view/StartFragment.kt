@@ -1,4 +1,4 @@
-package com.example.vpet_tam.ui.startwindow
+package com.example.vpet_tam.view
 
 import androidx.fragment.app.viewModels
 import android.os.Bundle
@@ -6,12 +6,10 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import android.widget.ImageButton
-import androidx.navigation.Navigation
 import androidx.navigation.findNavController
-import androidx.navigation.fragment.NavHostFragment
 import com.example.vpet_tam.R
+import com.example.vpet_tam.viewmodel.StartViewModel
 
 class StartFragment : Fragment() {
 
@@ -19,13 +17,10 @@ class StartFragment : Fragment() {
         fun newInstance() = StartFragment()
     }
 
-    private val viewModel: StartViewModel by viewModels()
+    private val startViewModel: StartViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        // TODO: Use the ViewModel
-
 
     }
 
@@ -41,7 +36,6 @@ class StartFragment : Fragment() {
             p0?.findNavController()?.navigate(R.id.action_navigation_start_to_navigation_choose)
 
         }
-
         return view
 
     }

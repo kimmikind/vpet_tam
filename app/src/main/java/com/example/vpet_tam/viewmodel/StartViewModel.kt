@@ -1,4 +1,4 @@
-package com.example.vpet_tam.ui.startwindow
+package com.example.vpet_tam.viewmodel
 
 import androidx.lifecycle.ViewModel
 

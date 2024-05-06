@@ -1,15 +1,18 @@
-package com.example.vpet_tam.ui.choosenewpet
+package com.example.vpet_tam.viewmodel
 
 import android.view.View
+import android.widget.EditText
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.navigation.fragment.NavHostFragment.Companion.findNavController
 import com.example.vpet_tam.R
 
-class ChooseViewModel : ViewModel() {
+class ChooseViewModel: ViewModel() {
     private val _chooseState = MutableLiveData<Int>()
+    private val _nameState = MutableLiveData<String>()
     val chooseState: MutableLiveData<Int> get() = _chooseState
-    fun onButtonClicked() {
-        TODO("Not yet implemented")
+    val nameState : MutableLiveData<String> get() = _nameState
+    fun onButtonClicked(name: EditText, item: View) {
 
     }
 
@@ -26,9 +29,8 @@ class ChooseViewModel : ViewModel() {
         _chooseState.value = img
     }
 
+    fun inputName(name: String) {
+        _nameState.value = name
+    }
 
-        /*.apply {
-        value = "This is choose Fragment"
-    }*/
-    //val text: LiveData<String> = _text
 }

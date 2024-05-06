@@ -1,4 +1,4 @@
-package com.example.vpet_tam
+package com.example.vpet_tam.view
 
 import android.os.Bundle
 import android.view.View

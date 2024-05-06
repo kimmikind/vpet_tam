@@ -23,4 +23,5 @@
     <string name="menu_turn_event">ON/OFF\t RANDOM EVENTS</string>
     <string name="menu_free_pet">FREE YOUR PET</string>
     <string name="ok_event">OK</string>
+    <string name="ok_btn_txt">OK</string>
 </resources>
