@@ -2,6 +2,7 @@ package com.example.vpet_tam.repository
 
 import android.content.Context
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import com.example.vpet_tam.model.PetModel
 import com.example.vpet_tam.model.RandomEventModel
 import com.example.vpet_tam.room.MyDatabase
@@ -9,7 +10,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.launch
 
-class MyRepository {
+open class MyRepository {
 
     companion object {
 
@@ -17,6 +18,7 @@ class MyRepository {
 
         var petModel: LiveData<PetModel>? = null
         var randomEventModel: LiveData<RandomEventModel>? = null
+        var idModel : LiveData<Int>? = null
 
         fun initializeDB(context: Context): MyDatabase {
             return MyDatabase.getDataseClient(context)
@@ -59,15 +61,28 @@ class MyRepository {
             return randomEventModel
         }
 
-        fun insertEvent(context: Context, event: String, type: String, ev_hunger: String, ev_health: String, ev_energy: String
-        ) {
+        fun insertEvent(context: Context, event: String, type: String, stat_type: String, x_num: Double, ev_time :Int)
+        {
             myDatabase = initializeDB(context)
             CoroutineScope(IO).launch {
-                val eventDetails = RandomEventModel(event, type, ev_hunger, ev_health, ev_energy)
+                val eventDetails = RandomEventModel(event, type, stat_type, x_num, ev_time)
                 myDatabase!!.getDao().InsertEvent(eventDetails)
             }
 
         }
+
+        fun updatePetName(context: Context, id: Int, name: String) {
+            myDatabase = initializeDB(context)
+            myDatabase!!.getDao().updatePetName(id,name)
+        }
+
+        fun updatePetStat(context: Context, id: Int, hunger: String, health: String, energy: String) {
+
+            myDatabase = initializeDB(context)
+            myDatabase!!.getDao().updatePetStat(id,hunger, health, energy)
+
+        }
+
 
 
     }

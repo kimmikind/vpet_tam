@@ -33,8 +33,12 @@ class StartFragment : Fragment() {
 
         var btn: ImageButton = view.findViewById(R.id.play_btn)
         btn.setOnClickListener { p0 ->
-            p0?.findNavController()?.navigate(R.id.action_navigation_start_to_navigation_choose)
-
+            if (SettingsFragment.id_check == -1 || SettingsFragment.id_check == 0) {
+                p0?.findNavController()?.navigate(R.id.action_navigation_start_to_navigation_choose)
+            }
+            else {
+                p0?.findNavController()?.navigate(R.id.action_navigation_start_to_navigation_home)
+            }
         }
         return view
 

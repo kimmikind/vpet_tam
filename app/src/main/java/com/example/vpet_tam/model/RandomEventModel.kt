@@ -12,17 +12,16 @@ data class RandomEventModel(
     @ColumnInfo(name = "type")
     var Type: String,
 
-    @ColumnInfo(name = "ev_hunger")
-    var Eventhunger: String,
+    @ColumnInfo(name = "stat_type")
+    var StatType: String,
 
-    @ColumnInfo(name = "ev_health")
-    var Eventhealth: String,
+    @ColumnInfo(name = "x_num")
+    var XNumber: Double,
 
-    @ColumnInfo(name = "ev_energy")
-    var Eventenergy: String
+    @ColumnInfo(name = "ev_time")
+    var EventTime: Int
 
     ) {
-
         @PrimaryKey(autoGenerate = true)
         @ColumnInfo(name = "id")
         var Id: Int? = null

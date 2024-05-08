@@ -1,6 +1,7 @@
 package com.example.vpet_tam.room
 
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
@@ -21,7 +22,10 @@ interface DAOAccess {
      fun deletePet(id: Int)
 
      @Query("UPDATE Pet SET hunger =:hunger, health =:health, energy =:energy WHERE id =:id")
-     fun updatePet(id: Int, hunger: String, health: String, energy: String)
+     fun updatePetStat(id: Int, hunger: String, health: String, energy: String)
+
+     @Query("UPDATE Pet SET name =:name WHERE id =:id")
+     fun updatePetName(id: Int, name: String)
 
      //получить событие рандомно
      @Query("SELECT * FROM RandomEvent ORDER BY RANDOM() LIMIT 1")

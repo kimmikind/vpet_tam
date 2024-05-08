@@ -7,7 +7,7 @@ import androidx.room.RoomDatabase
 import com.example.vpet_tam.model.PetModel
 import com.example.vpet_tam.model.RandomEventModel
 
-@Database(entities = [PetModel::class, RandomEventModel::class], version = 2, exportSchema = false)
+@Database(entities = [PetModel::class, RandomEventModel::class], version = 1, exportSchema = false)
 abstract class MyDatabase : RoomDatabase() {
 
     abstract fun getDao() : DAOAccess

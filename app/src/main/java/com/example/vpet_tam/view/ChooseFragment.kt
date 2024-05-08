@@ -16,8 +16,10 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.findNavController
 import com.example.vpet_tam.databinding.FragmentChooseBinding
+import com.example.vpet_tam.view.SettingsFragment.Companion.save_img
 import com.example.vpet_tam.viewmodel.ChooseViewModel
 import com.example.vpet_tam.viewmodel.DbViewModel
+import com.example.vpet_tam.viewmodel.HomeViewModel
 import kotlinx.coroutines.launch
 
 
@@ -25,10 +27,13 @@ class ChooseFragment : Fragment() {
 
     companion object {
         fun newInstance() = ChooseFragment()
+
+
     }
     //решение без ViewModelProvider.get()
     private val chooseViewModel: ChooseViewModel by activityViewModels()
     private val dbViewModel: DbViewModel by activityViewModels()
+    private val homeViewModel: HomeViewModel by activityViewModels()
 
     private var _binding: FragmentChooseBinding? = null
     private var image :Int = 0
@@ -51,14 +56,17 @@ class ChooseFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        //проверка на наличие питомца
 
-        binding.btnStart.setOnClickListener{
+        //dbViewModel.getPetDetails(requireActivity().application)
+
+        binding.btnStart.setOnClickListener{ it ->
             //проверка строки на пустую и только из пробелов
             //получение айди питомца
             if (name.isNotEmpty() && image != 0) { it as View
                 dbViewModel.insertData(requireActivity().application, name, "1", "100", "100", "100")
                 dbViewModel.getId(requireActivity().application, name)
-
+                homeViewModel.onSaveId(id)
                 Toast.makeText(activity,"inserted in db", Toast.LENGTH_SHORT).show()
                 it.findNavController().navigate(com.example.vpet_tam.R.id.action_navigation_choose_to_navigation_home)
             }
@@ -74,7 +82,6 @@ class ChooseFragment : Fragment() {
             }
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
             }
-
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
             }
         })
@@ -82,21 +89,27 @@ class ChooseFragment : Fragment() {
         with(binding) {
            iconBear.setOnClickListener { item ->
                 chooseViewModel.onIconClicked(item)
+
             }
             iconCat.setOnClickListener { item ->
                 chooseViewModel.onIconClicked(item)
+
             }
             iconRabbit.setOnClickListener { item ->
                 chooseViewModel.onIconClicked(item)
+
             }
             iconDog.setOnClickListener { item ->
                 chooseViewModel.onIconClicked(item)
+
             }
             iconTurtle.setOnClickListener { item ->
                 chooseViewModel.onIconClicked(item)
+
             }
             iconFrog.setOnClickListener { item ->
                 chooseViewModel.onIconClicked(item)
+
             }
         }
 
@@ -104,6 +117,8 @@ class ChooseFragment : Fragment() {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 chooseViewModel.chooseState.observe(viewLifecycleOwner, Observer {
                     image = it
+                    homeViewModel.onSaveImg(it)
+
                 })
                 chooseViewModel.nameState.observe(viewLifecycleOwner, Observer {
                     name = it
