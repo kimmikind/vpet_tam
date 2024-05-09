@@ -18,7 +18,6 @@ open class MyRepository {
 
         var petModel: LiveData<PetModel>? = null
         var randomEventModel: LiveData<RandomEventModel>? = null
-        var idModel : LiveData<Int>? = null
 
         fun initializeDB(context: Context): MyDatabase {
             return MyDatabase.getDataseClient(context)
@@ -55,6 +54,11 @@ open class MyRepository {
             return petModel
         }
 
+        fun selectAllEvents(): LiveData<RandomEventModel>? {
+            randomEventModel =  myDatabase!!.getDao().selectAllEvents()
+            return randomEventModel
+        }
+
         fun getEvent(context: Context): LiveData<RandomEventModel>? {
             myDatabase = initializeDB(context)
             randomEventModel = myDatabase!!.getDao().getEvent()
@@ -68,7 +72,6 @@ open class MyRepository {
                 val eventDetails = RandomEventModel(event, type, stat_type, x_num, ev_time)
                 myDatabase!!.getDao().InsertEvent(eventDetails)
             }
-
         }
 
         fun updatePetName(context: Context, id: Int, name: String) {

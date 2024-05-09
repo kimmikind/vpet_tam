@@ -27,8 +27,6 @@ class ChooseFragment : Fragment() {
 
     companion object {
         fun newInstance() = ChooseFragment()
-
-
     }
     //решение без ViewModelProvider.get()
     private val chooseViewModel: ChooseViewModel by activityViewModels()
@@ -56,9 +54,6 @@ class ChooseFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        //проверка на наличие питомца
-
-        //dbViewModel.getPetDetails(requireActivity().application)
 
         binding.btnStart.setOnClickListener{ it ->
             //проверка строки на пустую и только из пробелов

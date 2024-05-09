@@ -55,7 +55,7 @@ class HomeViewModel : ViewModel() {
         val a_stat = arrayOf("Health","Hunger","Energy","All").random()
         val a_type = arrayOf("decrease","increase", "stopped").random()
         val a_number = doubleArrayOf(1.5,2.0,3.0,1.25,1.75).random()
-        val a_time = arrayOf(60,30,20,15,90).random()
+        val a_time = arrayOf(0,30,20,15,40).random()
         var result = a_stat + " indicator " + a_type + " "+
                     a_number +"X for the next " + a_time + " seconds"
 

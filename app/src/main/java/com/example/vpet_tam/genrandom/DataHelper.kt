@@ -27,7 +27,6 @@ class DataHelper(context : Context) {
             stopTime = dateFormat.parse(stopString)
     }
 
-
     fun startTime(): Date? = startTime
 
     fun setStartTime(date: Date?){

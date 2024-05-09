@@ -24,7 +24,6 @@ class DbViewModel(application: Application) : AndroidViewModel(application) {
 
     fun getPetDetails(application: Application, id: Int) {
        _liveDataPet = MyRepository.getPetDetails(application,id)
-       //liveDataPet = _liveDataPet
     }
 
     fun deletePet(application: Application, id: Int) {
@@ -33,17 +32,16 @@ class DbViewModel(application: Application) : AndroidViewModel(application) {
 
     fun getId(application: Application, name: String){
         _liveDataPet = MyRepository.getId(application,name)
-        //_idState = MyRepository.getId(application,name)
     }
-
+    fun selectAllEvents(application: Application){
+        _liveDataEvent = MyRepository.selectAllEvents()
+    }
     fun getEvent(application: Application) {
         _liveDataEvent = MyRepository.getEvent(application)
-        //return liveDataEvent
     }
 
     fun insertEvent(application: Application, event: String,
                    type: String, stat_type: String, x_num: Double, ev_time: Int) {
-
         MyRepository.insertEvent(application, event, type, stat_type, x_num, ev_time)
     }
 

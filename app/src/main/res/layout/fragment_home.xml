@@ -115,9 +115,9 @@
             android:layout_marginStart="108dp"
             android:layout_marginTop="24dp"
             android:fontFamily="@font/arbutus"
-            android:text="______"
+            android:text="_____"
             android:textAppearance="@style/main_sent"
-            android:textSize="20sp"
+            android:textSize="24sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -147,16 +147,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:id="@+id/time"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="84dp"
-            android:layout_marginTop="144dp"
-            android:text="TextView"
-            android:textSize="20sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -167,87 +157,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
-
-        <!--<Spinner
-            android:id="@+id/spinner_food"
-            android:layout_width="105dp"
-            android:layout_height="67dp"
-            android:layout_marginStart="4dp"
-            android:layout_marginTop="48dp"
-            android:layout_marginBottom="3dp"
-            android:overlapAnchor="false"
-            app:layout_constraintBottom_toBottomOf="@+id/toolbar"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />-->
-        <!-- <ImageView
-            android:layout_marginTop="48dp"
-            android:id="@+id/button_food"
-            android:layout_width="100dp"
-            android:layout_height="70dp"
-            android:contentDescription="@string/food_desc"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/btn_food_text"
-            android:layout_width="75dp"
-            android:layout_height="20dp"
-            android:layout_marginStart="18dp"
-            android:layout_marginTop="75dp"
-            android:fontFamily="@font/press_start_2p"
-            android:text="@string/feed_btn"
-            android:textColor="@color/btn_home"
-            android:textSize="@dimen/btn_home_size"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <ImageView
-            android:id="@+id/button_cure"
-            android:layout_width="100dp"
-            android:layout_height="70dp"
-            android:layout_marginStart="100dp"
-            android:layout_marginTop="48dp"
-            android:contentDescription="@string/cure_desc"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/btn_cure_text"
-            android:layout_width="75dp"
-            android:layout_height="20dp"
-            android:layout_marginStart="118dp"
-            android:layout_marginTop="75dp"
-            android:fontFamily="@font/press_start_2p"
-            android:text="@string/cure_btn"
-            android:textColor="@color/btn_home"
-            android:textSize="@dimen/btn_home_size"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <ImageView
-            android:id="@+id/button_sleep"
-            android:layout_width="100dp"
-            android:layout_height="70dp"
-            android:layout_marginStart="200dp"
-            android:layout_marginTop="48dp"
-            android:contentDescription="@string/sleep_desc"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/btn_sleep_text"
-            android:layout_width="89dp"
-            android:layout_height="29dp"
-            android:layout_marginStart="210dp"
-            android:layout_marginTop="75dp"
-
-            android:fontFamily="@font/press_start_2p"
-            android:gravity="left"
-            android:text="@string/sleep_btn"
-            android:textColor="@color/btn_home"
-            android:textSize="@dimen/btn_home_size"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" /> -->
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
@@ -506,6 +415,15 @@
             android:layout_height="wrap_content"
             android:hint="id"
             app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="TextView"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

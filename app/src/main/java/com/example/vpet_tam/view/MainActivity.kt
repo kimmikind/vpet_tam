@@ -24,7 +24,6 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-    // Fetch the stored data in onResume() Because this is what will be called when the app opens again
     override fun onResume() {
         super.onResume()
         Toast.makeText(this, "act resume ${save_img}", Toast.LENGTH_SHORT).show()
@@ -35,16 +34,12 @@ class MainActivity : AppCompatActivity() {
         sh.edit().remove("id").apply();
         sh.edit().remove("img").apply();
     }
-    // Store the data in the SharedPreference in the onPause() method
-    // When the user closes the application onPause() will be called and data will be stored
     override fun onPause() {
         super.onPause()
         Toast.makeText(this, " act pause ${save_img}", Toast.LENGTH_SHORT).show()
-        // Creating a shared pref object with a file name "MySharedPref" in private mode
         val sharedPreferences = getSharedPreferences("MySharedPref", MODE_PRIVATE)
         val myEdit = sharedPreferences.edit()
 
-        // write all the data entered by the user in SharedPreference and apply
         myEdit.putInt("img",SettingsFragment.save_img)
         myEdit.putInt("id", SettingsFragment.id_check)
         myEdit.apply()

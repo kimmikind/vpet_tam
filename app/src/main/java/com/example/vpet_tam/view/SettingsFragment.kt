@@ -1,18 +1,21 @@
 package com.example.vpet_tam.view
 
 import android.app.ActivityManager
-import android.app.Application
+import android.app.Dialog
 import android.content.Context
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.Window
+import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
-import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import com.example.vpet_tam.R
 import com.example.vpet_tam.databinding.FragmentSettingsBinding
@@ -29,6 +32,7 @@ class SettingsFragment : Fragment() {
     companion object {
         var id_check:Int = -1
         var save_img : Int =0
+        var flag = 1
 
         fun newInstance() = SettingsFragment()
     }
@@ -63,31 +67,30 @@ class SettingsFragment : Fragment() {
 
         }
         binding.btnChangeName.setOnClickListener {
-            //var name = ""
-            val inputEditTextField = EditText(requireActivity())
-            val dialog = AlertDialog.Builder(requireContext())
-                .setTitle("Title")
-                .setMessage("Message")
-                .setView(inputEditTextField)
-                .setPositiveButton("OK") { _, _ ->
-                    val editTextInput = inputEditTextField .text.toString()
-                    //Timber.d("editext value is: $editTextInput")
-                    CoroutineScope(IO).launch {
-                        dbViewModel.updatePetName(
-                            requireActivity().application,
-                            id_check,
-                            editTextInput
-                        )
-                    }
+            val dialog = Dialog(activity as AppCompatActivity)
+            dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+            dialog.setCancelable(false)
+            dialog.setContentView(R.layout.alert_editor)
+            val body: EditText? = dialog.findViewById(R.id.ch_name)
+            val okBtn1: Button? = dialog.findViewById(R.id.ok_button_name)
+            okBtn1?.setOnClickListener {
+                val name = body?.text.toString()
+                dialog.dismiss()
+                CoroutineScope(IO).launch {
+                    dbViewModel.updatePetName(
+                        requireActivity().application,
+                        id_check,
+                        name
+                    )
                 }
-                .setNegativeButton("Cancel", null)
-                .create()
+            }
+            dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
             dialog.show()
 
 
         }
         binding.btnTurnEvent.setOnClickListener {
-
+            if (flag == 1) flag = 0 else flag = 1
         }
         binding.btnFreePet.setOnClickListener {
             CoroutineScope(Dispatchers.IO).launch {
@@ -123,7 +126,6 @@ class SettingsFragment : Fragment() {
                     "back:${id_check}",
                     Toast.LENGTH_SHORT
                 ).show()
-               // homeViewModel.onSaveId(id_check)
                 p3?.findNavController()?.navigate(R.id.action_navigation_settings_to_navigation_home)
             }
             else p3?.findNavController()?.navigate(R.id.action_navigation_settings_to_navigation_start)
@@ -133,7 +135,6 @@ class SettingsFragment : Fragment() {
         binding.btnQuit.setOnClickListener {
             homeViewModel.idState.observe(viewLifecycleOwner) {
                 id_check = it
-                //dbViewModel.updatePetStat(requireActivity().application, id_check,"123","134","456")
                 Toast.makeText(
                     requireContext().applicationContext,
                     "quit:${id_check},${save_img}",

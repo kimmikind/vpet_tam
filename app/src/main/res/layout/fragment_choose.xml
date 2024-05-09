@@ -153,21 +153,10 @@
             android:fontFamily="@font/press_start_2p"
             android:hint="type pet's name"
             android:inputType="text"
+            android:backgroundTint="@color/main"
             app:layout_constraintStart_toStartOf="@+id/type_name_ic"
             app:layout_constraintTop_toTopOf="@+id/type_name_ic" />
 
-        <!--<TextView
-            android:id="@+id/choosed"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="152dp"
-            android:layout_marginTop="16dp"
-            android:fontFamily="@font/press_start_2p"
-            android:textAppearance="@style/main_sent"
-            android:text=""
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />-->
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </FrameLayout>
-<!--</androidx.constraintlayout.widget.ConstraintLayout>-->

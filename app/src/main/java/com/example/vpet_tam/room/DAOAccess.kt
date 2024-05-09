@@ -1,7 +1,6 @@
 package com.example.vpet_tam.room
 
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
@@ -27,11 +26,13 @@ interface DAOAccess {
      @Query("UPDATE Pet SET name =:name WHERE id =:id")
      fun updatePetName(id: Int, name: String)
 
+     @Query("SELECT * FROM RandomEvent")
+     fun selectAllEvents(): LiveData<RandomEventModel>?
+
      //получить событие рандомно
      @Query("SELECT * FROM RandomEvent ORDER BY RANDOM() LIMIT 1")
      fun getEvent() : LiveData<RandomEventModel>?
 
-     //добавить событие
      @Insert(onConflict = OnConflictStrategy.REPLACE)
      suspend fun InsertEvent(randomEventModel: RandomEventModel)
 
