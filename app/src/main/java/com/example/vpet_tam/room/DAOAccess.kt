@@ -26,8 +26,8 @@ interface DAOAccess {
      @Query("UPDATE Pet SET name =:name WHERE id =:id")
      fun updatePetName(id: Int, name: String)
 
-     @Query("SELECT * FROM RandomEvent")
-     fun selectAllEvents(): LiveData<RandomEventModel>?
+     @Query("SELECT COUNT(*) FROM RandomEvent")
+     fun selectAllEvents(): Int?
 
      //получить событие рандомно
      @Query("SELECT * FROM RandomEvent ORDER BY RANDOM() LIMIT 1")

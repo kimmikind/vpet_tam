@@ -17,6 +17,10 @@ class DbViewModel(application: Application) : AndroidViewModel(application) {
     private var _liveDataEvent: LiveData<RandomEventModel>? = null
     val liveDataEvent: LiveData<RandomEventModel>? get() = _liveDataEvent
 
+    private val _countEvents = MutableLiveData<Int>()
+    val countEvents: MutableLiveData<Int> get() = _countEvents
+
+
     fun insertData(application: Application, name: String,
         age: String, hunger: String, health: String, energy: String) {
         MyRepository.insertData(application, name, age, hunger,health,energy)
@@ -34,7 +38,7 @@ class DbViewModel(application: Application) : AndroidViewModel(application) {
         _liveDataPet = MyRepository.getId(application,name)
     }
     fun selectAllEvents(application: Application){
-        _liveDataEvent = MyRepository.selectAllEvents()
+        _countEvents.value = MyRepository.selectAllEvents()
     }
     fun getEvent(application: Application) {
         _liveDataEvent = MyRepository.getEvent(application)

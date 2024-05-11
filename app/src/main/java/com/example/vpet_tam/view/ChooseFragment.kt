@@ -62,13 +62,35 @@ class ChooseFragment : Fragment() {
                 dbViewModel.insertData(requireActivity().application, name, "1", "100", "100", "100")
                 dbViewModel.getId(requireActivity().application, name)
                 homeViewModel.onSaveId(id)
-                Toast.makeText(activity,"inserted in db", Toast.LENGTH_SHORT).show()
+                //Toast.makeText(activity,"inserted in db", Toast.LENGTH_SHORT).show()
+
+
+                //добавление в таблицу рандомных событий
+                var event = ""
+                var type = ""
+                var x_number = 0.0
+                var stat = ""
+                var evtime = 0
+                for (i in 1..30) {
+                    homeViewModel.onGenerateEvent()
+                    homeViewModel.eventDetails.observe(viewLifecycleOwner) {
+                        event = it.eventState
+                        type = it.type
+                        stat = it.stat
+                        x_number = it.x_number
+                        evtime = it.ev_time
+                    }
+                    dbViewModel.insertEvent(requireActivity().application, event, type,
+                        stat, x_number, evtime)
+                }
+
                 it.findNavController().navigate(com.example.vpet_tam.R.id.action_navigation_choose_to_navigation_home)
             }
             else {
                 Toast.makeText(activity,"name or image is null!", Toast.LENGTH_SHORT).show()
             }
         }
+        //запись имени из EditText
         binding.typeNameTxt.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {
                 name = binding.typeNameTxt.text.toString().trim()
@@ -80,7 +102,7 @@ class ChooseFragment : Fragment() {
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
             }
         })
-
+        // выбираем для home fragment картинку исходя из выбора пользователя
         with(binding) {
            iconBear.setOnClickListener { item ->
                 chooseViewModel.onIconClicked(item)
@@ -107,7 +129,7 @@ class ChooseFragment : Fragment() {
 
             }
         }
-
+        // сохраняем выбор типа питомца
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 chooseViewModel.chooseState.observe(viewLifecycleOwner, Observer {
@@ -121,5 +143,7 @@ class ChooseFragment : Fragment() {
             }
     }
 }
+
+
 }
 

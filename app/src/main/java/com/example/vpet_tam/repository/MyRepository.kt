@@ -54,9 +54,9 @@ open class MyRepository {
             return petModel
         }
 
-        fun selectAllEvents(): LiveData<RandomEventModel>? {
-            randomEventModel =  myDatabase!!.getDao().selectAllEvents()
-            return randomEventModel
+        fun selectAllEvents(): Int? {
+            val count =  myDatabase!!.getDao().selectAllEvents()
+            return count
         }
 
         fun getEvent(context: Context): LiveData<RandomEventModel>? {

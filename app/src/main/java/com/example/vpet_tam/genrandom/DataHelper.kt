@@ -6,7 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import java.text.SimpleDateFormat
 import java.util.*
 
-class DataHelper(context : Context) {
+class DataHelper(context: Context) {
     private var shPref : SharedPreferences = context.getSharedPreferences(PREF, AppCompatActivity.MODE_PRIVATE)
     private var dateFormat = SimpleDateFormat("MM/dd/yyyy HH:mm:ss", Locale.getDefault())
 

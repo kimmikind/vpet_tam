@@ -26,8 +26,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
-        Toast.makeText(this, "act resume ${save_img}", Toast.LENGTH_SHORT).show()
-        // Fetching the stored data from the SharedPreference
+        //Toast.makeText(this, "act resume ${save_img}", Toast.LENGTH_SHORT).show()
         val sh = getSharedPreferences("MySharedPref", MODE_PRIVATE)
         SettingsFragment.save_img = sh.getInt("img",0)
         SettingsFragment.id_check = sh.getInt("id", 0)
@@ -36,7 +35,7 @@ class MainActivity : AppCompatActivity() {
     }
     override fun onPause() {
         super.onPause()
-        Toast.makeText(this, " act pause ${save_img}", Toast.LENGTH_SHORT).show()
+        //Toast.makeText(this, " act pause ${save_img}", Toast.LENGTH_SHORT).show()
         val sharedPreferences = getSharedPreferences("MySharedPref", MODE_PRIVATE)
         val myEdit = sharedPreferences.edit()
 

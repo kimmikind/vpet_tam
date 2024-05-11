@@ -19,6 +19,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.navigation.findNavController
 import com.example.vpet_tam.R
 import com.example.vpet_tam.databinding.FragmentSettingsBinding
+import com.example.vpet_tam.genrandom.DataHelper
 import com.example.vpet_tam.viewmodel.ChooseViewModel
 import com.example.vpet_tam.viewmodel.DbViewModel
 import com.example.vpet_tam.viewmodel.HomeViewModel
@@ -33,17 +34,15 @@ class SettingsFragment : Fragment() {
         var id_check:Int = -1
         var save_img : Int =0
         var flag = 1
+        var gen = 0
+        var flag_event = 0
 
         fun newInstance() = SettingsFragment()
     }
-    private val settingsViewModel: SettingsViewModel by activityViewModels()
     private val dbViewModel: DbViewModel by activityViewModels()
-    private val chooseViewModel: ChooseViewModel by activityViewModels()
     private val homeViewModel: HomeViewModel by activityViewModels()
 
-
     private var _binding: FragmentSettingsBinding? = null
-    // This property is only valid between onCreateView and onDestroyView.
     private val binding get() = _binding!!
 
     override fun onCreateView(
@@ -64,7 +63,6 @@ class SettingsFragment : Fragment() {
         }
         homeViewModel.imgState.observe(viewLifecycleOwner) {
             save_img = it
-
         }
         binding.btnChangeName.setOnClickListener {
             val dialog = Dialog(activity as AppCompatActivity)
@@ -86,14 +84,27 @@ class SettingsFragment : Fragment() {
             }
             dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
             dialog.show()
-
-
         }
         binding.btnTurnEvent.setOnClickListener {
-            if (flag == 1) flag = 0 else flag = 1
+            if (flag == 1) {
+                flag = 0
+                Toast.makeText(
+                    requireContext().applicationContext,
+                    "event set off",
+                    Toast.LENGTH_SHORT
+                ).show()
+            } else {
+                flag = 1
+                Toast.makeText(
+                    requireContext().applicationContext,
+                    "event set on",
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
+
         }
         binding.btnFreePet.setOnClickListener {
-            CoroutineScope(Dispatchers.IO).launch {
+            CoroutineScope(IO).launch {
                 if (it != null)
                     dbViewModel.deletePet(requireActivity().application, id_check)
                 }
@@ -109,23 +120,21 @@ class SettingsFragment : Fragment() {
                     "pet deleted",
                     Toast.LENGTH_SHORT
                 ).show()
-            }
-                .onFailure {
+            }.onFailure {
                     Toast.makeText(
                         requireContext().applicationContext,
                         "error deleting pet id:${id_check}",
                         Toast.LENGTH_SHORT
                     ).show()
-                }
-
+            }
         }
         binding.btnBack.setOnClickListener {p3 ->
             if (id_check != -1 && id_check != 0) {
-                Toast.makeText(
+                /*Toast.makeText(
                     requireContext().applicationContext,
                     "back:${id_check}",
                     Toast.LENGTH_SHORT
-                ).show()
+                ).show()*/
                 p3?.findNavController()?.navigate(R.id.action_navigation_settings_to_navigation_home)
             }
             else p3?.findNavController()?.navigate(R.id.action_navigation_settings_to_navigation_start)
@@ -135,26 +144,21 @@ class SettingsFragment : Fragment() {
         binding.btnQuit.setOnClickListener {
             homeViewModel.idState.observe(viewLifecycleOwner) {
                 id_check = it
-                Toast.makeText(
+                /*Toast.makeText(
                     requireContext().applicationContext,
                     "quit:${id_check},${save_img}",
                     Toast.LENGTH_SHORT
-                ).show()
+                ).show()*/
             }
-
             val activityManager = activity?.getSystemService(Context.ACTIVITY_SERVICE) as ActivityManager
             activityManager.appTasks.forEach { task -> task.setExcludeFromRecents(true) }
             activity?.finishAffinity()
 
         }
 
-
-
     }
-
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
-
     }
 }
