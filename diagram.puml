@@ -1,0 +1,250 @@
+@startuml
+class com.example.vpet_tam.genrandom.DataHelper$Companion {
++  PREF
++  START_TIME_KEY
++  STOP_TIME_KEY
++  COUNTING_KEY
+}
+
+class com.example.vpet_tam.genrandom.DataHelper {
+- SharedPreferences shPref
+-  dateFormat
+-  timerCounting
+- Date? startTime
+- Date? stopTime
++ void null()
++ Date? startTime()
++ void setStartTime(Date?)
++ Date? stopTime()
++ void setStopTime(Date?)
++ Boolean timerCounting()
++ void setTimerCounting(Boolean)
+}
+
+
+class com.example.vpet_tam.view.ChooseFragment$Companion {
++ void newInstance()
+}
+
+class com.example.vpet_tam.view.ChooseFragment {
+- ChooseViewModel chooseViewModel
+- DbViewModel dbViewModel
+- HomeViewModel homeViewModel
+- FragmentChooseBinding? _binding
+- Int image
+- String name
+- Int id
+-  binding
++ View onCreateView(LayoutInflater,ViewGroup?,Bundle?)
++ void onViewCreated(View,Bundle?)
+}
+
+
+class com.example.vpet_tam.view.MainActivity {
+- ActivityMainBinding binding
++ void onCreate(Bundle?)
++ void onResume()
++ void onPause()
+}
+
+
+class com.example.vpet_tam.model.PetModel {
+}
+class com.example.vpet_tam.viewmodel.DbViewModel {
+- LiveData<PetModel>? _liveDataPet
++ LiveData<PetModel>? liveDataPet
+- LiveData<RandomEventModel>? _liveDataEvent
++ LiveData<RandomEventModel>? liveDataEvent
+-  _countEvents
++ MutableLiveData<Int> countEvents
++ void insertData(Application,String,void,String,String,String,String)
++ void getPetDetails(Application,Int)
++ void deletePet(Application,Int)
++ void getId(Application,String)
++ void selectAllEvents(Application)
++ void getEvent(Application)
++ void insertEvent(Application,String,void,String,String,Double,Int)
++ void updatePetName(Application,Int,String)
++ void updatePetStat(Application,Int,String,String,String)
+}
+
+
+class com.example.vpet_tam.view.SettingsFragment$Companion {
++ Int id_check
++ Int save_img
++  flag
++  gen
++  flag_event
++ void newInstance()
+}
+
+
+class com.example.vpet_tam.view.SettingsFragment {
+- DbViewModel dbViewModel
+- HomeViewModel homeViewModel
+- FragmentSettingsBinding? _binding
+-  binding
++ View onCreateView(LayoutInflater,ViewGroup?,Bundle?)
++ void onViewCreated(View,Bundle?)
++ void onDestroyView()
+}
+
+
+class com.example.vpet_tam.view.StartFragment$Companion {
++ void newInstance()
+}
+
+class com.example.vpet_tam.view.StartFragment {
+- StartViewModel startViewModel
++ void onCreate(Bundle?)
++ View onCreateView(LayoutInflater,ViewGroup?,Bundle?)
+}
+
+
+interface com.example.vpet_tam.room.DAOAccess {
++ void InsertData(PetModel)
++ LiveData<PetModel> getPetDetails(Int)
++ void deletePet(Int)
++ void updatePetStat(Int,String,String,String)
++ void updatePetName(Int,String)
++ Int? selectAllEvents()
++ LiveData<RandomEventModel>? getEvent()
++ void InsertEvent(RandomEventModel)
++ LiveData<PetModel>? getId(String)
+}
+
+class com.example.vpet_tam.viewmodel.HomeViewModel {
+-  _idState
++ MutableLiveData<Int> idState
+-  _imgState
++ MutableLiveData<Int> imgState
+-  _eventDetails
++ MutableLiveData<EventDetails> eventDetails
++ void onButtonClicked(LinearLayout?)
++ void onSaveId(Int)
++ void onSaveImg(Int)
++ void onGenerateEvent()
+}
+
+
+class com.example.vpet_tam.model.RandomEventModel {
+}
+class com.example.vpet_tam.viewmodel.SettingsViewModel {
+-  _text
++ LiveData<String> text
+}
+
+class com.example.vpet_tam.viewmodel.StartViewModel {
+}
+class com.example.vpet_tam.view.HomeFragment$Companion {
++ void newInstance()
+}
+
+class com.example.vpet_tam.view.HomeFragment$TimeTask {
++ void run()
+}
+
+class com.example.vpet_tam.view.HomeFragment {
+- HomeViewModel homeViewModel
+- DbViewModel dbViewModel
++ DataHelper dataHelper
+-  timer
+- Double hunger
+- Double health
+- Double energy
+- String type_event
+- Double x_number
+- Int event_time
+- String type_stat
+- Int measure_start
+- FragmentHomeBinding? _binding
+-  binding
++ LinearLayout? dropDownMenuIconItem
++ View onCreateView(LayoutInflater,ViewGroup?,Bundle?)
++ void onViewCreated(View,Bundle?)
+- void checkStat(Double,String,Int)
+- void addCureStat(Double)
+- void addFoodStat(Double)
+- void getSeconds(Long,Int)
+- Int removeStat(String,Int)
+- void measureEvent()
++ void onResume()
+- void resetAction()
+- String timeStringFromLong(Long)
+- String makeTimeString(Long,Long,Long)
+- void stopTimer()
+- void startTimer()
+- void startStopAction()
+- Date calcRestartTime()
++ void onCreateOptionsMenu(Menu,MenuInflater)
++ void showDialog(String,String)
+}
+
+
+class com.example.vpet_tam.viewmodel.ChooseViewModel {
+-  _chooseState
+-  _nameState
++ MutableLiveData<Int> chooseState
++ MutableLiveData<String> nameState
++ void onButtonClicked(EditText,View)
++ void onIconClicked(View)
++ void inputName(String)
+}
+
+
+class com.example.vpet_tam.model.EventDetails {
+}
+class com.example.vpet_tam.repository.MyRepository$Companion {
++ MyDatabase? myDatabase
++ LiveData<PetModel>? petModel
++ LiveData<RandomEventModel>? randomEventModel
++ MyDatabase initializeDB(Context)
++ void insertData(Context,void,String,void,String,String,String,String)
++ void null()
++ LiveData<PetModel>? getPetDetails(Context,Int)
++ void deletePet(Context,Int)
++ LiveData<PetModel>? getId(Context,String)
++ Int? selectAllEvents()
++ LiveData<RandomEventModel>? getEvent(Context)
++ void insertEvent(Context,String,String,String,Double,Int)
++ void null()
++ void updatePetName(Context,Int,String)
++ void updatePetStat(Context,Int,String,String,String)
+}
+
+
+class com.example.vpet_tam.repository.MyRepository {
+}
+class com.example.vpet_tam.room.MyDatabase$Companion {
+- MyDatabase? INSTANCE
++ MyDatabase getDataseClient(Context)
+}
+
+
+abstract class com.example.vpet_tam.room.MyDatabase {
++ DAOAccess getDao()
+}
+
+
+
+com.example.vpet_tam.genrandom.DataHelper +.. com.example.vpet_tam.genrandom.DataHelper$Companion
+com.example.vpet_tam.view.ChooseFragment +.. com.example.vpet_tam.view.ChooseFragment$Companion
+androidx.fragment.app.Fragment <|-- com.example.vpet_tam.view.ChooseFragment
+androidx.appcompat.app.AppCompatActivity <|-- com.example.vpet_tam.view.MainActivity
+androidx.lifecycle.AndroidViewModel <|-- com.example.vpet_tam.viewmodel.DbViewModel
+com.example.vpet_tam.view.SettingsFragment +.. com.example.vpet_tam.view.SettingsFragment$Companion
+androidx.fragment.app.Fragment <|-- com.example.vpet_tam.view.SettingsFragment
+com.example.vpet_tam.view.StartFragment +.. com.example.vpet_tam.view.StartFragment$Companion
+androidx.fragment.app.Fragment <|-- com.example.vpet_tam.view.StartFragment
+androidx.lifecycle.AndroidViewModel <|-- com.example.vpet_tam.viewmodel.HomeViewModel
+androidx.lifecycle.AndroidViewModel <|-- com.example.vpet_tam.viewmodel.SettingsViewModel
+androidx.lifecycle.ViewModel <|-- com.example.vpet_tam.viewmodel.StartViewModel
+com.example.vpet_tam.view.HomeFragment +.. com.example.vpet_tam.view.HomeFragment$Companion
+com.example.vpet_tam.view.HomeFragment +.. com.example.vpet_tam.view.HomeFragment$TimeTask
+com.example.vpet_tam.view.TimerTask <|-- com.example.vpet_tam.view.HomeFragment$TimeTask
+androidx.fragment.app.Fragment <|-- com.example.vpet_tam.view.HomeFragment
+androidx.lifecycle.ViewModel <|-- com.example.vpet_tam.viewmodel.ChooseViewModel
+com.example.vpet_tam.repository.MyRepository +.. com.example.vpet_tam.repository.MyRepository$Companion
+com.example.vpet_tam.room.MyDatabase +.. com.example.vpet_tam.room.MyDatabase$Companion
+androidx.room.RoomDatabase <|-- com.example.vpet_tam.room.MyDatabase
+@enduml

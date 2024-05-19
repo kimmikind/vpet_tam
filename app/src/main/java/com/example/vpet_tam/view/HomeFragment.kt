@@ -29,11 +29,13 @@ import com.example.vpet_tam.view.SettingsFragment.Companion.flag
 import com.example.vpet_tam.view.SettingsFragment.Companion.flag_event
 import com.example.vpet_tam.view.SettingsFragment.Companion.gen
 import com.example.vpet_tam.view.SettingsFragment.Companion.id_check
+import com.example.vpet_tam.view.SettingsFragment.Companion.measure_start
 import com.example.vpet_tam.view.SettingsFragment.Companion.save_img
 import com.example.vpet_tam.viewmodel.DbViewModel
 import com.example.vpet_tam.viewmodel.HomeViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers.IO
+import kotlinx.coroutines.Dispatchers.Main
 import kotlinx.coroutines.launch
 import java.util.Timer
 import java.util.*
@@ -60,7 +62,7 @@ class HomeFragment : Fragment() {
     private var type_stat : String = ""
     //private var flag_event = 0
 
-    private var measure_start : Int = 0
+    //private var measure_start : Int = 0
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
 
@@ -75,9 +77,6 @@ class HomeFragment : Fragment() {
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        binding.btnSettings.setOnClickListener{p2 ->
-            p2.findNavController().navigate(R.id.action_navigation_home_to_navigation_settings)
-        }
         // установка нижней главной панели меню
         (activity as AppCompatActivity).setSupportActionBar(binding.toolbar)
         setHasOptionsMenu(true)
@@ -104,6 +103,16 @@ class HomeFragment : Fragment() {
             save_img = it
         }
         startStopAction()
+
+        binding.btnSettings.setOnClickListener{p2 ->
+            CoroutineScope(IO).launch {
+                dbViewModel.updatePetStat(
+                    requireActivity().application, id_check,
+                    binding.statHunger.text.toString(),  binding.statHealth.text.toString(),  binding.statEnergy.text.toString()
+                )
+            }
+            p2.findNavController().navigate(R.id.action_navigation_home_to_navigation_settings)
+        }
 
         //таймер
         if(dataHelper.timerCounting())
@@ -132,23 +141,26 @@ class HomeFragment : Fragment() {
             hunger += 1
             addFoodStat(hunger)
 
+
         }
         binding.fishBtn.setOnClickListener {
-            hunger += 2
+            if (hunger < 99) hunger += 2 else hunger += 1
             addFoodStat(hunger)
 
         }
         binding.milkBtn.setOnClickListener {
-            hunger += 3
+            if (hunger < 98) hunger += 3 else if (hunger < 99) hunger += 2 else hunger += 1
+            //hunger += 3
             addFoodStat(hunger)
+
         }
         binding.moonBtn.setOnClickListener {
              energy += 1
-            if (energy >= 100.0) {
+            if (energy > 99.0) {
                 binding.moonBtn.isEnabled =false
+                binding.statEnergy.text = energy.toInt().toString()
             }
             else {
-                energy += 1
                 binding.statEnergy.text = energy.toInt().toString()
                 CoroutineScope(IO).launch {
                     dbViewModel.updatePetStat(
@@ -164,10 +176,13 @@ class HomeFragment : Fragment() {
         binding.syringeBtn.setOnClickListener {
             health += 1
             addCureStat(health)
+
         }
         binding.pillBtn.setOnClickListener {
-            health += 2
+            if (health < 99) health += 2 else health += 1
+            //health += 2
             addCureStat(health)
+
         }
         binding.btnEvent.setOnClickListener {
                 if (flag_event == 0) {
@@ -184,6 +199,7 @@ class HomeFragment : Fragment() {
                 })
                 flag_event = 1
                 gen = 1
+                    binding.btnEvent.isEnabled = false
                 }
 
         }
@@ -246,7 +262,7 @@ class HomeFragment : Fragment() {
         }
     }
     private fun addCureStat(stat: Double) {
-        if (stat >= 100.0) {
+        if (stat > 99.0) {
             binding.pillBtn.isEnabled = false
             binding.syringeBtn.isEnabled = false
             binding.statHealth.text = stat.toInt().toString()
@@ -263,7 +279,7 @@ class HomeFragment : Fragment() {
     }
 
     private fun addFoodStat(stat: Double) {
-        if (stat >= 100.0) {
+        if (stat > 99.0) {
             binding.meatBtn.isEnabled = false
             binding.fishBtn.isEnabled = false
             binding.milkBtn.isEnabled = false
@@ -283,12 +299,14 @@ class HomeFragment : Fragment() {
         val seconds = (time / 1000) % 60
         val measure= String.format("%02d", seconds)
         //забираем 1 пункт по прошествию каждых 20 сек
+
         removeStat(measure,flag_event)
     }
-    private fun removeStat(measure: String, fl: Int) : Int {
+    private fun removeStat(measure: String, fl: Int)  {
         var event_time = measure_start.toString()
         //если время события 60 секунд
-        if (measure_start == 0) event_time = "0$event_time"
+        if (measure_start == 0 || measure_start < 10) event_time = "0$event_time"
+        Log.d("errr",fl.toString()+" "+event_time+"!!!!")
         if (fl == 0) {
             when (measure) {
                 "59", "20", "40" -> {
@@ -309,77 +327,90 @@ class HomeFragment : Fragment() {
                 }
             }
 
-        } else if (fl == 1 && measure == event_time) {
-            flag_event = 0
-            binding.btnEvent.isEnabled = true
-            return flag_event
-        } else when (measure) {
-            "59", "20", "40" -> {
-                measureEvent()
-                binding.statHunger.text = hunger.toInt().toString()
-                binding.statHealth.text = health.toInt().toString()
-                binding.statEnergy.text = energy.toInt().toString()
-
-                CoroutineScope(IO).launch {
-                    dbViewModel.updatePetStat(
-                        requireActivity().application, id_check,
-                        hunger.toString(), health.toString(), energy.toString()
-                    )
-                }
+        } else if (fl == 1) {
+            if(measure == event_time) {
+                Log.d("errr",measure+"!")
+                measure_start = 0
+                flag_event = 0
+                binding.btnEvent.isEnabled = true
+                //return flag_event
             }
+            else {
+                when (measure) {
+                    "59", "20", "40" -> {
+                        measureEvent()
 
+
+                        CoroutineScope(IO).launch {
+                            dbViewModel.updatePetStat(
+                                    requireActivity().application, id_check,
+                                    hunger.toString(), health.toString(), energy.toString()
+                            )
+                        }
+                    }
+                }
+
+            }
         }
-        return flag_event
+       //return flag_event
     }
 
     private fun measureEvent() {
-        if (type_event == "+" && hunger != 100.0 && health != 100.0 && energy != 100.0) {
-            if (type_stat == "Hunger") {
+        if (type_event == "+") {
+            if (type_stat == "Hunger" && hunger < 100.0) {
                 hunger += 0.5 * x_number; health -= 0.5; energy -= 0.5
             }
-            if (type_stat == "Health") {
+            else if (type_stat == "Health" && health < 100.0) {
                 hunger -= 0.5; health += 0.5 * x_number; energy -= 0.5
             }
-            if (type_stat == "Energy") {
+            else if (type_stat == "Energy" && energy < 100.0) {
                 hunger -= 0.5; health -= 0.5; energy += 0.5 * x_number
             }
-            if (type_stat == "All") {
+            else if (type_stat == "All" && hunger <= 99.0 && health <= 99.0 && energy <= 99.0) {
                 hunger += 0.5 * x_number; health += 0.5 * x_number; energy += 0.5 * x_number
             }
         }
-        else if (type_event == "-" && hunger != 1.0 && health != 1.0 && energy != 1.0) {
+        else if (type_event == "-" && hunger >= 1.0 && health >= 1.0 && energy >= 1.0) {
             if (type_stat == "Hunger") {
                 hunger -= 0.5 * x_number; health -= 0.5; energy -= 0.5
             }
-            if (type_stat == "Health") {
+            else if (type_stat == "Health") {
                 hunger -= 0.5; health -= 0.5 * x_number; energy -= 0.5
             }
-            if (type_stat == "Energy") {
+            else if (type_stat == "Energy") {
                 hunger -= 0.5; health -= 0.5; energy -= 0.5 * x_number
             }
-            if (type_stat == "All") {
+            else if (type_stat == "All") {
                 hunger -= 0.5 * x_number; health -= 0.5 * x_number; energy -= 0.5 * x_number
             }
         }
         else if (type_event == "0") {
             if (type_stat == "Hunger") {
-                health -= 0.5; energy -= 0.5
+                hunger = hunger ; health -= 0.5; energy -= 0.5
             }
-            if (type_stat == "Health") {
-                hunger -= 0.5; energy -= 0.5
+            else if (type_stat == "Health") {
+                hunger -= 0.5; health += 0; energy -= 0.5
             }
-            if (type_stat == "Energy") {
-                hunger -= 0.5; health -= 0.5;
+            else if (type_stat == "Energy") {
+                hunger -= 0.5; health -= 0.5; energy += 0
+            }
+            else if (type_stat == "All") {
+                hunger += 0; health += 0; energy += 0
             }
 
         }
+        binding.statHunger.text = hunger.toInt().toString()
+        binding.statHealth.text = health.toInt().toString()
+        binding.statEnergy.text = energy.toInt().toString()
     }
 
     override fun onResume() {
         super.onResume()
         if (save_img != 0) binding.petMain.setImageResource(save_img)
         startTimer()
-        if (flag_event == 0 && flag == 1) binding.btnEvent.isEnabled = true else if (flag_event == 1 || flag == 0) binding.btnEvent.isEnabled = false
+        if (flag_event == 0 && flag == 1) binding.btnEvent.isEnabled = true
+        else if ( flag == 0 ) binding.btnEvent.isEnabled = false
+        dbViewModel.getPetDetails(requireActivity().application,id_check)
         /*Toast.makeText(requireContext().applicationContext,"resume$flag_event",Toast.LENGTH_SHORT).show()*/
     }
     private inner class TimeTask(): TimerTask() {
@@ -389,14 +420,14 @@ class HomeFragment : Fragment() {
                 activity?.runOnUiThread {
                     binding.time.text = timeStringFromLong(time)
 
-                    if (flag_event == 1 && gen == 1) {
+                    if (flag_event == 1 && gen == 1 && flag == 1) {
                         val seconds = (time / 1000) % 60
                         //вычисление продолжительности события
                         measure_start = String.format("%02d", seconds).toIntOrNull()!! + event_time
                         if (measure_start > 59) measure_start -= 60
                         gen = 0
                         Log.d("errr", measure_start.toString())
-                        binding.btnEvent.isEnabled = false
+                        //binding.btnEvent.isEnabled = false
                     }
                     getSeconds(time, flag_event)
                 }

@@ -36,6 +36,7 @@ class SettingsFragment : Fragment() {
         var flag = 1
         var gen = 0
         var flag_event = 0
+        var measure_start = 0
 
         fun newInstance() = SettingsFragment()
     }
@@ -58,6 +59,9 @@ class SettingsFragment : Fragment() {
     }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        dbViewModel.liveDataPet?.observe(viewLifecycleOwner){
+
+        }
         homeViewModel.idState.observe(viewLifecycleOwner) {
             id_check = it
         }

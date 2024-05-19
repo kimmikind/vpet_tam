@@ -9,30 +9,19 @@ import com.example.vpet_tam.model.RandomEventModel
 
 @Database(entities = [PetModel::class, RandomEventModel::class], version = 1, exportSchema = false)
 abstract class MyDatabase : RoomDatabase() {
-
     abstract fun getDao() : DAOAccess
-
     companion object {
-
         @Volatile
         private var INSTANCE: MyDatabase? = null
-
         fun getDataseClient(context: Context) : MyDatabase {
-
             if (INSTANCE != null) return INSTANCE!!
-
             synchronized(this) {
-
                 INSTANCE = Room
                     .databaseBuilder(context, MyDatabase::class.java, "MY_DATABASE")
                     .fallbackToDestructiveMigration()
                     .build()
-
                 return INSTANCE!!
-
             }
         }
-
     }
-
 }
